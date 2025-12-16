@@ -1,7 +1,6 @@
 # ProMoral-Bench: Evaluating Prompting Strategies for Moral Reasoning and Safety in LLMs
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Paper](https://img.shields.io/badge/Paper-AAAI%202026-red.svg)](https://arxiv.org/abs/TODO)
 
 Official repository for **ProMoral-Bench**, a unified benchmark for evaluating prompting strategies across ethical reasoning and safety tasks in large language models.
 
