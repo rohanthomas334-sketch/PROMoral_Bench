@@ -474,7 +474,3 @@ We thank:
 - [Additional acknowledgments to be added after de-anonymization]
 
 ---
-
-**Last Updated**: February 2025  
-**Paper Status**: Under review at AAAI 2026 AIR-FM Workshop  
-**Code Status**: Research prototype (active development)
