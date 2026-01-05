@@ -46,16 +46,32 @@ tqdm>=4.65.0
 python-dotenv>=1.0.0
 ```
 
+## Repository Structure
+
+```
+promoral-bench/
+├── data/
+│   └── ethics_contrast/     # ETHICS-Contrast dataset (our contribution)
+├── src/
+│   └── promoral_bench/      # Source code and model wrappers
+├── results/                 # Pre-computed experimental results
+│   ├── ethics/              # ETHICS results by model and strategy
+│   ├── ethics_contrast/     # ETHICS-Contrast results
+│   ├── scruples/            # Scruples results
+│   └── wildjailbreak/       # WildJailbreak results
+├── notebooks/              
+│   └── analysis.ipynb       # Complete implementation and analysis
+├── requirements.txt
+├── .env.example
+├── COMPLIANCE.md            # Licenses, compute details, annotation info
+├── CONTRIBUTING.md
+├── LICENSE
+└── README.md
+```
+
 ## Dataset Access
 
-Datasets are organized in separate branches for version control:
-
-- **ETHICS**: `git checkout ethics-dataset` - Subset of ETHICS dataset (1,700 instances)
-- **ETHICS-Contrast**: `git checkout ethics-contrast-dataset` - 200 human-audited minimal-edit pairs
-- **Scruples**: `git checkout scruples-dataset` - AITA subset (1,466 instances)
-- **WildJailbreak**: `git checkout wildjailbreak-dataset` - Harmful/benign prompt pairs (430 total)
-
-### ETHICS-Contrast Dataset
+### ETHICS-Contrast Dataset (Our Contribution)
 
 Our newly contributed dataset containing 200 minimal-edit pairs:
 - 100 label-flipping edits (should change moral judgment)
@@ -63,13 +79,22 @@ Our newly contributed dataset containing 200 minimal-edit pairs:
 - Human-audited through two-stage validation process
 - Tests robustness to controlled perturbations
 
-**License**: MIT (see LICENSE)
+Located in `data/ethics_contrast/`.
+
+**License**: CC-BY 4.0
 
 **Limitations**: 
 - English-only
 - Reflects predominantly Western moral norms
 - Perturbations generated with researcher priors
 - See paper Section 8 (Limitations) for full discussion
+
+### External Datasets
+
+The following datasets are accessed via HuggingFace during evaluation:
+- **ETHICS**: `hendrycks/ethics` - Subset of ETHICS dataset (1,700 instances)
+- **Scruples**: `allenai/scruples` - AITA subset (1,466 instances)
+- **WildJailbreak**: `allenai/wildjailbreak` - Harmful/benign prompt pairs (430 total)
 
 ## API Configuration
 
@@ -86,76 +111,28 @@ TOGETHER_API_KEY=your_key_here
 
 ## Usage
 
-### Quick Start
+### Reproducing Results
 
-```python
-from promoral_bench import evaluate_strategy
-
-# Evaluate a single strategy on a single dataset
-results = evaluate_strategy(
-    strategy="few-shot",
-    model="gpt-4.1",
-    dataset="ethics",
-    temperature=0
-)
-```
-
-### Running Full Evaluation
+All experiments can be reproduced using the Jupyter notebook in `notebooks/`:
 
 ```bash
-# Run all strategies on all datasets for a specific model
-python run_evaluation.py --model gpt-4.1 --all-strategies --all-datasets
+# Configure API keys
+cp .env.example .env
+# Edit .env with your API keys
 
-# Run specific strategy and dataset
-python run_evaluation.py --model claude-sonnet-4 --strategy few-shot-cot --dataset scruples
-
-# Calculate UMSS scores
-python calculate_umss.py --results-dir ./results
+# Launch Jupyter
+jupyter notebook notebooks/analysis.ipynb
 ```
 
-### Reproducing Paper Results
+The notebook contains:
+- Complete implementation of all 11 prompting strategies
+- Model API wrappers for all 4 providers (OpenAI, Anthropic, Google, Together)
+- All evaluation metrics (accuracy, F1, ECE, Brier, ASR, RTA, UMSS)
+- Code to reproduce all paper tables and figures
 
-```bash
-# Run complete evaluation suite (WARNING: See compute costs below)
-bash scripts/reproduce_paper.sh
+### Pre-computed Results
 
-# This will:
-# 1. Run all 11 strategies across 4 models and 4 datasets
-# 2. Generate all metrics (accuracy, F1, ECE, Brier, ASR, RTA)
-# 3. Calculate UMSS scores
-# 4. Produce all tables and figures from the paper
-```
-
-## Repository Structure
-
-```
-promoral-bench/
-├── data/
-│   ├── ethics/              # ETHICS dataset (separate branch)
-│   ├── ethics_contrast/     # ETHICS-Contrast dataset (separate branch)
-│   ├── scruples/            # Scruples dataset (separate branch)
-│   └── wildjailbreak/       # WildJailbreak dataset (separate branch)
-├── prompts/
-│   ├── templates/           # Prompt templates for all strategies
-│   └── demonstrations/      # Few-shot examples
-├── src/
-│   ├── strategies/          # Implementation of 11 prompting strategies
-│   ├── models/              # Model API wrappers
-│   ├── evaluation/          # Metric calculation and scoring
-│   └── utils/               # Helper functions
-├── results/                 # Experimental outputs
-│   ├── ethics/              # ETHICS results by model and strategy
-│   ├── ethics_contrast/     # ETHICS-Contrast results
-│   ├── scruples/            # Scruples results
-│   └── wildjailbreak/       # WildJailbreak results
-├── scripts/                 # Evaluation scripts
-├── notebooks/              
-│   └── analysis.ipynb       # Main analysis notebook
-├── requirements.txt
-├── .env.example
-├── .gitignore
-└── README.md
-```
+All experimental results are available in `results/` with per-model, per-dataset CSV files containing detailed metrics. See `results/metadata.json` for experiment configuration details.
 
 ## Compute Resources
 
@@ -311,7 +288,7 @@ All strategies enforce standardized output formats for comparability:
 9. **Value-Grounded**: Explicit reasoning through Schwartz values + care ethics frameworks
 10. **First-Principles**: 4-step deductive reasoning (Facts → Values → Logic → Conclusion)
 
-Full prompt templates available in `prompts/templates/`. See Appendix A of paper for complete specifications.
+See Appendix A of paper for complete prompt specifications.
 
 ### Role Confirmation Process
 
@@ -359,11 +336,20 @@ This code is released under the MIT License (see [LICENSE](LICENSE)).
 ### Dataset Licenses
 
 - **ETHICS**: MIT License (original dataset by Hendrycks et al., 2021)
-- **ETHICS-Contrast**: MIT License (our contribution, included with this repository)
-- **Scruples**: MIT License (original dataset by Lourie et al., 2020)
-- **WildJailbreak**: Apache 2.0 License (original dataset by Wei et al., 2023)
+- **ETHICS-Contrast**: CC-BY 4.0 (our contribution, included with this repository)
+- **Scruples**: Apache 2.0 (original dataset by Lourie et al., 2020)
+- **WildJailbreak**: Apache 2.0 (original dataset by Wei et al., 2023)
 
-All datasets used with permission and proper attribution. See individual dataset branches for complete license information.
+All datasets used with permission and proper attribution.
+
+## Compliance and Reproducibility
+
+See [COMPLIANCE.md](COMPLIANCE.md) for detailed information on:
+- Dataset licenses and terms of use
+- Computational resources and API costs
+- Software dependencies and versions
+- ETHICS-Contrast annotation procedures
+- AI assistant disclosure
 
 ## Contributing
 
@@ -385,7 +371,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - **Reproducibility**: Results are fully reproducible given fixed random seeds and API versions
 
 ### Model and Temporal Specificity
-- **API versions**: Results tied to specific model versions accessed August 2025-January 2025
+- **API versions**: Results tied to specific model versions accessed January-February 2025
 - **Model updates**: Future API updates may affect reproducibility
 - **Closed-source models**: Cannot control for training data or alignment procedures
 - **Version information**: All model identifiers and API endpoints logged in results metadata
@@ -404,7 +390,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
   
 - **ETHICS-Contrast**: 
   - Perturbations reflect researcher priors and intuitions
-  - Human annotators were US-based graduate students
+  - Human annotators were US-based researchers
   - May not capture all edge cases or cultural variations
 
 - **WildJailbreak**:
