@@ -445,6 +445,16 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
   - Adversarial prompts may not reflect real-world safety scenarios
   - Binary safe/unsafe classification simplifies nuanced safety concerns
 
+### Annotation and Compliance Details
+
+**ETHICS-Contrast Annotation**: Created and validated by three co-authors (computer science researchers based in the United States). No external annotators or crowdworkers were used. No IRB approval was required as this did not constitute human subjects research.
+
+**AI Assistant Disclosure**: [Choose one]
+- "No AI assistants were used in this research." OR
+- "We used [tool] for [purpose]; all outputs were verified by authors."
+
+**API Terms**: All model outputs obtained in compliance with provider terms of service.
+
 ### Prompt-Evaluation Coupling
 - **In-distribution demonstrations**: Few-shot examples drawn from same datasets under evaluation
 - **Potential inflation**: Within-distribution sampling may inflate few-shot performance
