@@ -1,0 +1,108 @@
+{
+  "experiment_info": {
+    "experiment_dates": "January-February 2025",
+    "total_api_calls_estimate": 7744,
+    "estimated_total_cost_usd": 850,
+    "cost_breakdown": {
+      "gpt-4.1": "$320 (highest per-token cost)",
+      "claude-sonnet-4": "$280",
+      "gemini-2.5-pro": "$150",
+      "deepseek-v3": "$100 (lowest per-token cost)"
+    }
+  },
+  "api_versions": {
+    "gpt-4.1": {
+      "provider": "OpenAI",
+      "model_string": "gpt-4.1",
+      "api_version": "2024-04-09",
+      "parameter_count": "Not publicly disclosed"
+    },
+    "claude-sonnet-4": {
+      "provider": "Anthropic",
+      "model_string": "claude-sonnet-4-20250514",
+      "api_version": "2025-01",
+      "parameter_count": "Not publicly disclosed"
+    },
+    "gemini-2.5-pro": {
+      "provider": "Google",
+      "model_string": "gemini-2.5-pro",
+      "api_version": "2025-01",
+      "parameter_count": "Not publicly disclosed"
+    },
+    "deepseek-v3": {
+      "provider": "Together AI (hosting DeepSeek)",
+      "model_string": "deepseek-ai/DeepSeek-V3",
+      "api_version": "2025-01",
+      "parameter_count": "671B (publicly disclosed by DeepSeek)"
+    }
+  },
+  "evaluation_settings": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": "Varied by strategy (512-4096)",
+    "random_seed": "N/A (deterministic with temperature=0)",
+    "num_runs": 1,
+    "note": "Single deterministic run per configuration"
+  },
+  "dataset_sizes": {
+    "ethics": {
+      "total": 1700,
+      "split_used": "test_hard",
+      "source": "hendrycks/ethics (HuggingFace)",
+      "license": "MIT License"
+    },
+    "ethics_contrast": {
+      "total_pairs": 200,
+      "label_flipping": 100,
+      "label_preserving": 100,
+      "source": "Derived from ETHICS by authors",
+      "license": "CC-BY 4.0"
+    },
+    "scruples": {
+      "total": 1466,
+      "split_used": "test",
+      "source": "allenai/scruples",
+      "license": "Apache 2.0"
+    },
+    "wildjailbreak": {
+      "harmful_prompts": 230,
+      "benign_prompts": 200,
+      "total": 430,
+      "source": "allenai/wildjailbreak",
+      "license": "Apache 2.0"
+    }
+  },
+  "total_configurations": {
+    "models": 4,
+    "strategies": 11,
+    "datasets": 4,
+    "total_runs": 176,
+    "note": "4 models × 11 strategies × 4 datasets = 176 configurations"
+  },
+  "software_dependencies": {
+    "python_version": "3.10+",
+    "key_packages": {
+      "openai": ">=1.30.0",
+      "anthropic": ">=0.34.0",
+      "google-genai": ">=0.6.0",
+      "together": ">=1.3.0",
+      "pandas": ">=2.0.0",
+      "numpy": ">=1.24.0",
+      "scikit-learn": ">=1.4.0",
+      "huggingface_hub": ">=0.23.0",
+      "tqdm": ">=4.66.0",
+      "pyarrow": ">=15.0.0"
+    }
+  },
+  "compute_notes": {
+    "infrastructure": "Commercial API endpoints (no local GPU required)",
+    "parallelism": "Sequential API calls with rate limiting",
+    "preliminary_runs": "Initial runs used default 512 max tokens; reran with adjusted limits (up to 4096) for verbose strategies (Plan-and-Solve, Thought Experiment, Self-Correct, Value-Grounded)",
+    "total_tokens_processed_estimate": "~15M tokens across all experiments"
+  },
+  "reproducibility_notes": {
+    "determinism": "Temperature=0 ensures deterministic outputs for most providers",
+    "api_variability": "Model behavior may change with provider updates",
+    "cost_variability": "API pricing subject to change"
+  }
+}
