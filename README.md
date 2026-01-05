@@ -352,40 +352,6 @@ For **Role Prompting**, we use a confirmation selection procedure:
 
 See paper for complete results, statistical analysis, and figures.
 
-### UMSS Leaderboard
-
-**By Model:**
-| Rank | Model | MCS | SRS | UMSS |
-|------|-------|-----|-----|------|
-| 1 | GPT-4.1 | 0.640 | 0.710 | **0.675** |
-| 2 | DeepSeek-V3 | 0.698 | 0.625 | 0.662 |
-| 3 | Claude Sonnet-4 | 0.724 | 0.596 | 0.660 |
-| 4 | Gemini 2.5 Pro | 0.657 | 0.639 | 0.648 |
-
-**By Strategy:**
-| Rank | Strategy | MCS | SRS | UMSS |
-|------|----------|-----|-----|------|
-| 1 | Few-Shot-CoT | 0.966 | 0.686 | **0.802** |
-| 1 | Few-Shot | 0.948 | 0.695 | **0.802** |
-| 3 | Role Prompting | 0.932 | 0.636 | 0.756 |
-| 4 | Plan-and-Solve | 0.894 | 0.512 | 0.651 |
-| 5 | Zero-Shot-CoT | 0.827 | 0.509 | 0.630 |
-
-(See paper Table 5 for complete rankings)
-
-## Citation
-
-If you use ProMoral-Bench in your research, please cite:
-
-```bibtex
-@inproceedings{anonymous2026promoral,
-  title={ProMoral-Bench: Evaluating Prompting Strategies for Moral Reasoning and Safety in LLMs},
-  author={Anonymous},
-  booktitle={AAAI 2026 Workshop on AI Reasoning and Foundation Models (AIR-FM)},
-  year={2026}
-}
-```
-
 ## License
 
 This code is released under the MIT License (see [LICENSE](LICENSE)).
