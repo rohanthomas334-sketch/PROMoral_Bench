@@ -419,7 +419,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - **Reproducibility**: Results are fully reproducible given fixed random seeds and API versions
 
 ### Model and Temporal Specificity
-- **API versions**: Results tied to specific model versions accessed January-February 2025
+- **API versions**: Results tied to specific model versions accessed August 2025-January 2025
 - **Model updates**: Future API updates may affect reproducibility
 - **Closed-source models**: Cannot control for training data or alignment procedures
 - **Version information**: All model identifiers and API endpoints logged in results metadata
@@ -448,10 +448,6 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ### Annotation and Compliance Details
 
 **ETHICS-Contrast Annotation**: Created and validated by three co-authors (computer science researchers based in the United States). No external annotators or crowdworkers were used. No IRB approval was required as this did not constitute human subjects research.
-
-**AI Assistant Disclosure**: [Choose one]
-- "No AI assistants were used in this research." OR
-- "We used [tool] for [purpose]; all outputs were verified by authors."
 
 **API Terms**: All model outputs obtained in compliance with provider terms of service.
 
