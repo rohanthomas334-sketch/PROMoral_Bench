@@ -63,7 +63,6 @@ promoral-bench/
 │   └── analysis.ipynb       # Complete implementation and analysis
 ├── requirements.txt
 ├── .env.example
-├── COMPLIANCE.md            # Licenses, compute details, annotation info
 ├── CONTRIBUTING.md
 ├── LICENSE
 └── README.md
@@ -341,15 +340,6 @@ This code is released under the MIT License (see [LICENSE](LICENSE)).
 - **WildJailbreak**: Apache 2.0 (original dataset by Wei et al., 2023)
 
 All datasets used with permission and proper attribution.
-
-## Compliance and Reproducibility
-
-See [COMPLIANCE.md](COMPLIANCE.md) for detailed information on:
-- Dataset licenses and terms of use
-- Computational resources and API costs
-- Software dependencies and versions
-- ETHICS-Contrast annotation procedures
-- AI assistant disclosure
 
 ## Contributing
 
